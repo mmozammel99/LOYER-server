@@ -31,7 +31,7 @@ async function run() {
         })
         app.get('/home', async (req, res) => {
             const query = {}
-            const cursor = serviceCollection.find(query).sort({"time":-1})
+            const cursor = serviceCollection.find(query).sort({ "time": -1 })
             const service = await cursor.limit(3).toArray()
             res.send(service)
         })
@@ -54,9 +54,33 @@ async function run() {
                     serviceId: serviceId
                 }
             }
-            const cursor = reviewsCollection.find(query).sort({"time":-1})
+            const cursor = reviewsCollection.find(query).sort({ "time": -1 })
             const service = await cursor.toArray()
             res.send(service)
+        })
+        app.get('/my-reviews', async (req, res) => {
+            let query = {}
+            const email = req.query.email
+            if (email) {
+                query = {
+                    email: email
+                }
+            }
+            const cursor = reviewsCollection.find(query).sort({ "time": -1 })
+            const service = await cursor.toArray()
+            res.send(service)
+        })
+        app.patch('/my-reviews/:id', async (req, res) => {
+            const id = req.params.id
+            const feedback = req.body.feedback;
+            const query = { _id: ObjectId(id) }
+            const updateDoc = {
+                $set: {
+                    feedback: feedback
+                }
+            }
+            const result = await reviewsCollection.updateOne(query, updateDoc)
+            res.send(result)
         })
         app.post('/review', async (req, res) => {
             const review = req.body
