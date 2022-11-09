@@ -22,7 +22,14 @@ async function run() {
         const serviceCollection = client.db('lawyer').collection('service')
         const reviewsCollection = client.db('lawyer').collection('reviews')
 
-
+        app.get('/jwt', (req, res) => {
+            const user = req.body;
+            const token = jwt.sign(user,
+                process.env.ACCESS_TOKEN_SECRET, {
+                expiresIn: '1d'
+            })
+            res.send({token})
+        })
         app.get('/services', async (req, res) => {
             const query = {}
             const cursor = serviceCollection.find(query)
@@ -58,6 +65,11 @@ async function run() {
             const service = await cursor.toArray()
             res.send(service)
         })
+        app.post('/review', async (req, res) => {
+            const review = req.body
+            const result = await reviewsCollection.insertOne(review)
+            res.send(result)
+        })
         app.get('/my-reviews', async (req, res) => {
             let query = {}
             const email = req.query.email
@@ -82,11 +94,13 @@ async function run() {
             const result = await reviewsCollection.updateOne(query, updateDoc)
             res.send(result)
         })
-        app.post('/review', async (req, res) => {
-            const review = req.body
-            const result = await reviewsCollection.insertOne(review)
+        app.delete('/my-reviews/:id', async (req, res) => {
+            const id = req.params.id
+            const query = { _id: ObjectId(id) }
+            const result = await reviewsCollection.deleteOne(query)
             res.send(result)
         })
+
     }
     finally {
 
