@@ -38,6 +38,7 @@ async function run() {
     try {
         const serviceCollection = client.db('lawyer').collection('service')
         const reviewsCollection = client.db('lawyer').collection('reviews')
+        const appointmentCollection = client.db('lawyer').collection('appointment')
 
         app.post('/jwt', (req, res) => {
             const user = req.body;
@@ -68,6 +69,37 @@ async function run() {
         app.post('/services', async (req, res) => {
             const service = req.body
             const result = await serviceCollection.insertOne(service)
+            res.send(result)
+        })
+
+        app.post('/appointment', async (req, res) => {
+            const review = req.body
+            const result = await appointmentCollection.insertOne(review)
+            res.send(result)
+        })
+        app.get('/my-appointment', verifyJWT, async (req, res) => {
+            const decoded = req.decoded
+            if (decoded.email !== req.query.email) {
+                return res.status(403).send({
+                    message: 'unauthorized access'
+                })
+
+            }
+            let query = {}
+            const email = req.query.email
+            if (email) {
+                query = {
+                    email: email
+                }
+            }
+            const cursor = appointmentCollection.find(query).sort({ "time": -1 })
+            const service = await cursor.toArray()
+            res.send(service)
+        })
+        app.delete('/my-appointment/:id', async (req, res) => {
+            const id = req.params.id
+            const query = { _id: ObjectId(id) }
+            const result = await appointmentCollection.deleteOne(query)
             res.send(result)
         })
         app.get('/reviews', async (req, res) => {

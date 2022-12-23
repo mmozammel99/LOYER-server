@@ -1,21 +1,16 @@
 # LAWYER
 
-This project was Tailwind DaisyUI with [Create React App](https://github.com/facebook/create-react-app).
+This project was Tailwind DaisyUI and Mamba UI with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Description
 
-LAWYER is a personal website for lawyer John B. Someone.
-STRATEGY. EXPERIENCE. RESULTS.
-Calgary Criminal Defence Lawyers
-Trust your future to the #1 Google-reviewed criminal defence lawyer in Calgary.
-Highly skilled former prosecutor and trial lawyer that has successfully handled more than 5,000 cases and over 100 jury trials.
-Robert is an authority in criminal defense and professional licensing defense. Fluent in spanish, italian, hebrew, portuguese.
+It is an online based law firm website. It has the facility to provide any law-related services. it has a real-time feedback option in the service section and adds and delete service option if the admin wants. It implements a MongoDB database to store data and uses Tailwind CSS-based daisyUI components for the design. Its have a very useful Dark mode. It uses google firebase authentication and JWT token for security.
 
 - It's totally responsive web application.
 - It's basically a 6-page application.
 - It uses dynamic API.
 - This site is programmed using Javascript React.
-- This site is Designed using Tailwind CSS with daisyUI.
+- This site is Designed using Tailwind CSS with daisyUI and Mamba UI.
 - React Router is used to route it.
 - It uses react-photo-view .
 - 4 blogs have been added to the blog page
@@ -28,6 +23,7 @@ Robert is an authority in criminal defense and professional licensing defense. F
 - Node Express use for create Server Site.
 - Added sweetalert2 for make interacting.
 - Its have vary useFull Dark mode.
+* Moment use for see review time
 
 # Live Link
 
@@ -39,7 +35,7 @@ You may also see any lint errors in the console.
 
 ## Repo Link
 
-[https://github.com/Porgramming-Hero-web-course/b6a11-service-review-client-side-mmozammel99](https://github.com/Porgramming-Hero-web-course/b6a11-service-review-client-side-mmozammel99)
+[https://github.com/mozammel787/LAWYER](https://github.com/mozammel787/LAWYER)
 
 ## Server Live Link
 
@@ -47,11 +43,11 @@ You may also see any lint errors in the console.
 
 ## Server Repo Link
 
-[ https://github.com/programming-hero-web-course1/b610-lerning-platform-server-side-mmozammel99](https://github.com/Porgramming-Hero-web-course/b6a11-service-review-server-side-mmozammel99)
+[ https://github.com/mozammel787/LAWYER-server](https://github.com/mozammel787/LAWYER-server)
 
 ### Framework used
 
-Java Script React + Tailwind css with daisyUI + Google Firebase + Node Express + vercel
+Java Script React + Tailwind css with and Mamba UI + Google Firebase + Node Express + vercel
 
 ### Code Type
 
@@ -79,6 +75,7 @@ version: 0.1.0
     "express": "^4.18.2",
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^4.11.0
+    "moment"
 
 ### Server api
 
